@@ -14,12 +14,12 @@ class UserProfile extends StatelessWidget {
       length: 4,
       child: Scaffold(
         appBar: AppBar(
-          title: Text("vgb_05",style: TextStyle(fontSize: 18),),
+          title: const Text("vgb_05",style: TextStyle(fontSize: 18),),
           actions: [
-            IconButton(onPressed: (){}, icon: Icon(Icons.arrow_drop_down)),
-            SizedBox(width: 190,),
-            IconButton(onPressed: (){}, icon: Icon(Icons.add)),
-            IconButton(onPressed: (){}, icon: Icon(Icons.menu)),
+            IconButton(onPressed: (){}, icon: const Icon(Icons.arrow_drop_down)),
+            const SizedBox(width: 190,),
+            IconButton(onPressed: (){}, icon: const Icon(Icons.add)),
+            IconButton(onPressed: (){}, icon: const Icon(Icons.menu)),
           ],
         ),
         body: Column(
