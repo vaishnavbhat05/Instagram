@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:new_app/utils/account_tab1.dart';
-import 'package:new_app/utils/account_tab3.dart';
-import 'package:new_app/utils/bubble_stories.dart';
-
+import '../utils/account_tab1.dart';
 import '../utils/account_tab2.dart';
+import '../utils/account_tab3.dart';
 import '../utils/account_tab4.dart';
+import '../utils/bubble_stories.dart';
 
 class UserProfile extends StatelessWidget {
   const UserProfile({super.key});

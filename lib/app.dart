@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:new_app/widgets/home_screen.dart';
+import 'package:instagram/widgets/home_screen.dart';
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
