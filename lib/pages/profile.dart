@@ -13,6 +13,15 @@ class UserProfile extends StatelessWidget {
     return DefaultTabController(
       length: 4,
       child: Scaffold(
+        appBar: AppBar(
+          title: Text("vgb_05",style: TextStyle(fontSize: 18),),
+          actions: [
+            IconButton(onPressed: (){}, icon: Icon(Icons.arrow_drop_down)),
+            SizedBox(width: 190,),
+            IconButton(onPressed: (){}, icon: Icon(Icons.add)),
+            IconButton(onPressed: (){}, icon: Icon(Icons.menu)),
+          ],
+        ),
         body: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -74,13 +83,13 @@ class UserProfile extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text("Name2",style:TextStyle(fontWeight:FontWeight.bold),
+                  Text("Vaishnav",style:TextStyle(fontWeight:FontWeight.bold),
                   ),
                   Padding(
                     padding: EdgeInsets.symmetric(vertical: 2.0),
                     child: Text('I create apps & games'),
                   ),
-                  Text('m.youtube/name2/',style: TextStyle(color: Colors.blue),),
+                  Text('m.youtube/vaishnav/',style: TextStyle(color: Colors.blue),),
                 ],
               ),
             ),
@@ -93,7 +102,7 @@ class UserProfile extends StatelessWidget {
                       padding: const EdgeInsets.all(2.0),
                       child: Container(
                         decoration: BoxDecoration(border:Border.all(color: Colors.grey),
-                        borderRadius: BorderRadius.circular(5)),
+                            borderRadius: BorderRadius.circular(5)),
                         child: const Padding(
                           padding: EdgeInsets.all(8.0),
                           child: Center(child: Text("Edit Profile")),
