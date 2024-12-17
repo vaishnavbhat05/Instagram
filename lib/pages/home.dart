@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:new_app/utils/user_posts.dart';
-
 import '../utils/bubble_stories.dart';
+import '../utils/user_posts.dart';
 
 class UserHome extends StatelessWidget {
   UserHome({super.key});
