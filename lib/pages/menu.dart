@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+
+import '../login/view/LoginScreen.dart';
 
 class Menu extends StatefulWidget {
   const Menu({super.key});
@@ -8,6 +11,15 @@ class Menu extends StatefulWidget {
 }
 
 class _MenuState extends State<Menu> {
+  void _logout() async {
+    final prefs = await SharedPreferences.getInstance();
+    prefs.setBool('isLoggedIn', false); // Log the user out
+    prefs.remove('userId');
+    Navigator.pushReplacement(
+      context,
+      MaterialPageRoute(builder: (context) => const LoginScreen()),
+    );
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -19,6 +31,13 @@ class _MenuState extends State<Menu> {
         //       },
         //       icon: const Icon(Icons.arrow_back))
         // ],
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.logout), // Logout icon
+            onPressed: _logout, // Call logout method when clicked
+          ),
+
+        ]
       ),
     );
   }

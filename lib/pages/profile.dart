@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'home/provider/HomeProvider.dart';
 import '../utils/account_tab1.dart';
 import '../utils/account_tab2.dart';
 import '../utils/account_tab3.dart';
@@ -16,7 +18,6 @@ class UserProfile extends StatefulWidget {
 
 class _UserProfileState extends State<UserProfile> {
   String selectedAccount = "vgb_05"; // Current account
-  void _showAccountSwitcher(BuildContext context) {}
   Future<void> _launchURL(
     String url,
   ) async {
@@ -175,7 +176,7 @@ class _UserProfileState extends State<UserProfile> {
                 builder: (BuildContext context) {
                   return IconButton(
                     onPressed: () {
-                      Navigator.push(context, MaterialPageRoute(builder: (context)=> Menu()));// Use Builder context
+                      Navigator.push(context, MaterialPageRoute(builder: (context)=> const Menu()));// Use Builder context
                     },
                     icon: const Icon(Icons.menu),
                   );
@@ -202,11 +203,11 @@ class _UserProfileState extends State<UserProfile> {
                         shape: BoxShape.circle,
                       ),
                     ),
-                    const Expanded(
+                    Expanded(
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
-                          Column(
+                          const Column(
                             children: [
                               Text(
                                 "237",
@@ -216,7 +217,7 @@ class _UserProfileState extends State<UserProfile> {
                               Text('Posts'),
                             ],
                           ),
-                          Column(
+                          const Column(
                             children: [
                               Text(
                                 "3930",
@@ -228,12 +229,58 @@ class _UserProfileState extends State<UserProfile> {
                           ),
                           Column(
                             children: [
-                              Text(
-                                "40",
-                                style: TextStyle(
-                                    fontWeight: FontWeight.bold, fontSize: 16),
+                              TextButton(
+                                onPressed: (){
+                                  Column(
+                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    children: [
+                                      Expanded(
+                                        child: Consumer<HomeProvider>(
+                                          builder: (context, provider, child) {
+                                            if (provider.allFollowers.isEmpty) {
+                                              return const Center(child: Text("No followers available."));
+                                            }
+
+                                            return ListView.builder(
+                                              itemCount: provider.allFollowers.length,
+                                              itemBuilder: (context, index) {
+                                                final follower = provider.allFollowers[index];
+                                                return ListTile(
+                                                  title: Text(follower['name']!),
+                                                  leading: CircleAvatar(child: Text(follower['initials']!)),
+                                                  trailing: IconButton(
+                                                    icon: provider.followingList.contains(follower['name'])
+                                                        ? const Icon(Icons.check)
+                                                        : const Icon(Icons.add),
+                                                    onPressed: () {
+                                                      if (provider.followingList.contains(follower['name'])) {
+                                                        provider.remove(
+                                                            follower['name']!); // Remove from database and UI
+                                                      } else {
+                                                        provider.add(follower['name']!); // Add to database and UI
+                                                      }
+                                                    },
+                                                  ),
+                                                );
+                                              },
+                                            );
+                                          },
+                                        ),
+                                      ),
+                                    ],
+                                  );
+                                },
+                                child: const Column(
+                                  children: [
+                                    Text(
+                                      "40",
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.bold, fontSize: 16),
+                                    ),
+                                    Text('Followings'),
+                                  ],
+                                ),
                               ),
-                              Text('Followings'),
                             ],
                           ),
                         ],
