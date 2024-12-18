@@ -42,7 +42,7 @@ class _HomeScreenState extends State<HomeScreen> {
     UserHome(),
     const UserSearch(),
     const UserAdd(),
-    const UserReels(),
+    UserReels(),
     const UserProfile(),
   ];
 
