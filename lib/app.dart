@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:instagram/widgets/home_screen.dart';
+import 'package:instagram/widgets/login_screen.dart';
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
@@ -13,7 +14,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.grey,
       ),
-      home: const HomeScreen(),
+      home: const LoginScreen(),
     );
   }
 }
