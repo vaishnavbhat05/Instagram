@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import '../../utils/bubble_stories.dart';
 import '../../utils/user_posts.dart';
 import '../search.dart';
@@ -15,6 +16,20 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   int _selectedIndex = 0;
+  int? userId; // Store userId retrieved from SharedPreferences
+
+  @override
+  void initState() {
+    super.initState();
+    _loadUserId(); // Load userId when HomeScreen is initialized
+  }
+
+  Future<void> _loadUserId() async {
+    final prefs = await SharedPreferences.getInstance();
+    setState(() {
+      userId = prefs.getInt('userId'); // Get userId from SharedPreferences
+    });
+  }
 
   final List<Map<String, dynamic>> _navItems = [
     {'icon': Icons.home},
@@ -57,22 +72,22 @@ class _HomeScreenState extends State<HomeScreen> {
           children: [
             SizedBox(
               height: 130,
-              child: ListView.builder(
-                scrollDirection: Axis.horizontal,
-                itemCount: people.length,
-                itemBuilder: (context, index) {
-                  return BubbleStories(text: people[index]);
-                },
-              ),
+              // child: ListView.builder(
+              //   scrollDirection: Axis.horizontal,
+              //   itemCount: people.length,
+              //   itemBuilder: (context, index) {
+              //     return BubbleStories(text: people[index]);
+              //   },
+              // ),
             ),
-            Expanded(
-              child: ListView.builder(
-                itemCount: people.length,
-                itemBuilder: (context, index) {
-                  return UserPosts(name: people[index]);
-                },
-              ),
-            ),
+            // Expanded(
+            //   child: ListView.builder(
+            //     itemCount: people.length,
+            //     itemBuilder: (context, index) {
+            //       return UserPosts(name: people[index]);
+            //     },
+            //   ),
+            // ),
           ],
         );
       case 1:

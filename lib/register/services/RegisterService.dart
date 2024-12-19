@@ -56,7 +56,7 @@ class RegisterService {
       prefs.setBool('isRegistered', true);
 
       // Navigate to the HomeScreen
-      Navigator.pushReplacementNamed(context, '/home');
+      Navigator.pushNamedAndRemoveUntil(context, '/home', (route) => false);
     } else {
       // Handle the case where user could not be retrieved
       ScaffoldMessenger.of(context).showSnackBar(

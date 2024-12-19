@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:instagram/register/view/RegisterScreen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:provider/provider.dart';
 import '../../common_widgets/CustomTextfield.dart';
@@ -98,7 +99,11 @@ class _LoginScreenState extends State<LoginScreen> {
                 // Register Navigation
                 TextButton(
                   onPressed: () {
-                    Navigator.pushReplacementNamed(context, '/register');
+                    Navigator.pushAndRemoveUntil(
+                      context,
+                      MaterialPageRoute(builder: (context) => const RegisterScreen()),
+                          (route) => false,
+                    );
                   },
                   child: const Text("Don't have an account? Register"),
                 ),
@@ -119,11 +124,7 @@ class _LoginScreenState extends State<LoginScreen> {
       prefs.setBool('isLoggedIn', true); // Set login status to true
 
       // Replace the current screen and clear navigation stack
-      Navigator.pushAndRemoveUntil(
-        context,
-        MaterialPageRoute(builder: (context) => const HomeScreen()),
-            (route) => false, // Remove all previous routes
-      );
+      Navigator.pushNamedAndRemoveUntil(context, '/home', (route) => false);
     } else {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(content: Text('Invalid email or password')),

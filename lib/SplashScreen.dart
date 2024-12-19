@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'pages/home/home_screen.dart';
 
 
 class SplashScreen extends StatefulWidget {
@@ -25,15 +24,12 @@ class _SplashScreenState extends State<SplashScreen> {
     final isRegistered = prefs.getBool('isRegistered') ?? false;
 
     if (isLoggedIn) {
-      Navigator.pushReplacement(
-        context,
-        MaterialPageRoute(builder: (context) => const HomeScreen()),
-      );
+      Navigator.pushNamedAndRemoveUntil(context, '/home', (route) => false);
     } else {
       if (isRegistered) {
-        Navigator.pushReplacementNamed(context, '/login');
+        Navigator.pushNamedAndRemoveUntil(context, '/login', (route) => false);
       } else {
-        Navigator.pushReplacementNamed(context, '/register');
+        Navigator.pushNamedAndRemoveUntil(context, '/register', (route) => false);
       }
     }
   }

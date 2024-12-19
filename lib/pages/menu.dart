@@ -15,10 +15,8 @@ class _MenuState extends State<Menu> {
     final prefs = await SharedPreferences.getInstance();
     prefs.setBool('isLoggedIn', false); // Log the user out
     prefs.remove('userId');
-    Navigator.pushReplacement(
-      context,
-      MaterialPageRoute(builder: (context) => const LoginScreen()),
-    );
+    print("Navigating to /login");
+    Navigator.pushNamedAndRemoveUntil(context, '/login', (route) => false);
   }
   @override
   Widget build(BuildContext context) {

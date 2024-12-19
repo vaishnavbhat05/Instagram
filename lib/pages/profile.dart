@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
+import 'package:instagram/pages/followers.dart';
 import 'package:url_launcher/url_launcher.dart';
-import 'home/provider/HomeProvider.dart';
+import 'following.dart';
 import '../utils/account_tab1.dart';
 import '../utils/account_tab2.dart';
 import '../utils/account_tab3.dart';
@@ -214,70 +214,46 @@ class _UserProfileState extends State<UserProfile> {
                                 style: TextStyle(
                                     fontWeight: FontWeight.bold, fontSize: 16),
                               ),
-                              Text('Posts'),
-                            ],
-                          ),
-                          const Column(
-                            children: [
-                              Text(
-                                "3930",
-                                style: TextStyle(
-                                    fontWeight: FontWeight.bold, fontSize: 16),
-                              ),
-                              Text('Followers'),
+                              Text('Posts',style: TextStyle(fontWeight: FontWeight.bold),),
                             ],
                           ),
                           Column(
                             children: [
                               TextButton(
-                                onPressed: (){
-                                  Column(
-                                    crossAxisAlignment: CrossAxisAlignment.start,
-                                    children: [
-                                      Expanded(
-                                        child: Consumer<HomeProvider>(
-                                          builder: (context, provider, child) {
-                                            if (provider.allFollowers.isEmpty) {
-                                              return const Center(child: Text("No followers available."));
-                                            }
-
-                                            return ListView.builder(
-                                              itemCount: provider.allFollowers.length,
-                                              itemBuilder: (context, index) {
-                                                final follower = provider.allFollowers[index];
-                                                return ListTile(
-                                                  title: Text(follower['name']!),
-                                                  leading: CircleAvatar(child: Text(follower['initials']!)),
-                                                  trailing: IconButton(
-                                                    icon: provider.followingList.contains(follower['name'])
-                                                        ? const Icon(Icons.check)
-                                                        : const Icon(Icons.add),
-                                                    onPressed: () {
-                                                      if (provider.followingList.contains(follower['name'])) {
-                                                        provider.remove(
-                                                            follower['name']!); // Remove from database and UI
-                                                      } else {
-                                                        provider.add(follower['name']!); // Add to database and UI
-                                                      }
-                                                    },
-                                                  ),
-                                                );
-                                              },
-                                            );
-                                          },
-                                        ),
-                                      ),
-                                    ],
+                                onPressed: () {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(builder: (context) => const Followers()),
                                   );
                                 },
                                 child: const Column(
                                   children: [
                                     Text(
-                                      "40",
-                                      style: TextStyle(
-                                          fontWeight: FontWeight.bold, fontSize: 16),
+                                      "11",
+                                      style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16,color: Colors.black),
                                     ),
-                                    Text('Followings'),
+                                    Text('Followers',style: TextStyle(color: Colors.black),),
+                                  ],
+                                ),
+                              ),
+                            ],
+                          ),
+                          Column(
+                            children: [
+                              TextButton(
+                                onPressed: () {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(builder: (context) => const FollowingsScreen()),
+                                  );
+                                },
+                                child: const Column(
+                                  children: [
+                                    Text(
+                                      "10",
+                                      style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16,color: Colors.black),
+                                    ),
+                                    Text('Followings',style: TextStyle(color: Colors.black),),
                                   ],
                                 ),
                               ),

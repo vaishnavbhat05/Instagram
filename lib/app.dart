@@ -24,7 +24,7 @@ class MyApp extends StatelessWidget {
           '/': (context) => const SplashScreen(),
           '/register': (context) => const RegisterScreen(),
           '/login': (context) => const LoginScreen(),
-          '/home': (context) => const HomeScreen(),
+          '/home': (context) => const HomeScreen(), // Ensure this is added
         },
       ),
     );

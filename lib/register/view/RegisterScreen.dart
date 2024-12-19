@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:instagram/login/view/LoginScreen.dart';
 import '../../common_widgets/CustomTextfield.dart';
 import '../../../core/utils/validator.dart';
 import 'package:provider/provider.dart';
@@ -67,7 +68,11 @@ class _RegisterScreenState extends State<RegisterScreen> {
           icon: const Icon(Icons.arrow_back),
           onPressed: () {
             // Navigate back to the login page
-            Navigator.pushReplacementNamed(context, '/login');
+            Navigator.pushAndRemoveUntil(
+              context,
+              MaterialPageRoute(builder: (context) => const LoginScreen()),
+                  (route) => false,
+            );
           },
         ),
       ),
